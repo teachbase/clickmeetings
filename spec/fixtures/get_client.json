@@ -1,0 +1,31 @@
+{
+  "id":10,
+  "name":"Any Second",
+  "account_manager_name":"ClickMeeting",
+  "account_manager_email":"sales@clickmeeting.com",
+  "account_manager_phone":"+1 (888) 825-4256",
+  "email":"test@anysecond.com",
+  "packages":
+  [
+    {
+      "id":67,
+      "code":"anysecond_100",
+      "name":"AnySecond 100"
+    },
+    {
+      "id":90,
+      "code":"anysecond_100",
+      "name":"AnySecond 100 Webcams OFF"
+    },
+    {
+      "id":91,
+      "code":"anysecond_100",
+      "name":"AnySecond 100 Chat OFF"
+    },
+    {
+      "id":125,
+      "code":"anysecond_1000",
+      "name":"AnySecond 1000WC"
+    }
+  ]
+}
