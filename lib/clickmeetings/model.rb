@@ -11,19 +11,52 @@ module Clickmeetings
   
     class << self
       attr_accessor :resource_name
+      attr_reader :client_host, :client_api_key
+
+      delegate :remote_url, :remote_path, :handle_response, :client, to: :new
     
       def resource_name
-        @resource_name || pluralize(demodulize(self.name.to_s))
+        @resource_name ||= self.name.demodulize.pluralize.downcase
       end
 
       def find(id)
-        response = Clickmeetings.client.get(remote_url(__method__, id: id))
-        new.handle_response(response)
+        response = Clickmeetings.with_client(client_options) do
+          client.get(remote_url(__method__, id: id))
+        end
+        handle_response(response)
       end
 
       def all
-        response = Clickmeetings.client.get(remote_url(__method__))
-        new.handle_response(response)
+        response = Clickmeetings.with_client(client_options) do
+          client.get(remote_url(__method__))
+        end
+        handle_response(response)
+      end
+
+      def create(params = {})
+        response = Clickmeetings.with_client(client_options) do
+          client.post(remote_url(__method__), params)
+        end
+        handle_response(response)
+      end
+
+      def set_resource_name(name)
+        @resource_name = name
+      end
+
+      def set_client_host(host = nil)
+        @client_host = host
+      end
+
+      def set_client_api_key(api_key = nil)
+        @client_api_key = api_key
+      end
+
+      def client_options
+        {
+          url: @client_host ||= Clickmeetings.config.host,
+          api_key: @client_api_key ||= Clickmeetings.config.api_key
+        }
       end
     end
 
@@ -34,46 +67,50 @@ module Clickmeetings
     end
 
     def remote_url(action = nil, params = {})
-      url = case action
-            when :all
-              resource_name
-            when :show
-              "#{resource_name}/#{params[:id]}"
-            when :create
-              resource_name
-            when :update
-              "#{resource_name}/#{id}"
-            when :delete
-              "#{resource_name}/#{id}"
-            else
-              "#{resource_name}/#{id}/#{action}"
-            end
-      "#{url}?api_key=#{Clickmeetings.client.api_key}"
+      url = remote_path(action, params)
     end
 
     def persist?
       !!id
     end
 
-    def create(params = {})
-      handle_response client.post(remote_url(__method__), params)
-    end
-
     def update(params = {})
-      handle_response client.put(remote_url(__method__), params)
+      response = Clickmeetings.with_client(client_options) do
+        client.put(remote_url(__method__), params)
+      end
+      handle_response response
     end
 
-    def delete(params = {})
-      handle_response client.delete(remote_url(__method__), params)
-    end
-
-    def handle_response(body)
-      return unless body.present?
-      merge_attributes(body)
+    def destroy(params = {})
+      Clickmeetings.with_client(client_options) { client.delete(remote_url(__method__), params) }
       self
     end
 
+    def handle_response(body)
+      return unless [Hash, Array].include? body.class
+      merge_attributes(body)
+    end
+
+    def remote_path(action = nil, params = {})
+      case action
+      when :all
+        resource_name
+      when :find
+        "#{resource_name}/#{params[:id]}"
+      when :create
+        resource_name
+      when :update
+        "#{resource_name}/#{id}"
+      when :destroy
+        "#{resource_name}/#{id}"
+      else
+        "#{resource_name}/#{params[:id]}/#{action}"
+      end
+    end
+
     private
+
+    delegate :client_options, to: :class
 
     def merge_attributes(attrs)
       if attrs.is_a?(Array)
@@ -84,14 +121,18 @@ module Clickmeetings
     end
 
     def merge_collection(attrs)
-      attrs.each { |e| merge_object(e) }
+      attrs.map { |e| self.class.new.handle_response(e) }
     end
 
     def merge_object(attrs)
       attrs.each do |attribute, val|
-        next unless respond_to?(attribute)
-        send("#{attribute}=", value)
-      end      
+        if respond_to?(attribute)
+          send("#{attribute}=", val)
+        elsif val.is_a? Hash
+          merge_object val
+        end
+      end
+      self
     end
   end
 end

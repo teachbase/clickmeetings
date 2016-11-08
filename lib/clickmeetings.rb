@@ -4,8 +4,6 @@ require 'clickmeetings/client'
 require 'clickmeetings/model'
 require 'clickmeetings/exceptions'
 
-Gem.find_files('clickmeetings/models/*.rb').each { |path| require path }
-
 module Clickmeetings
   def self.config
     @config ||= Config.new
@@ -31,8 +29,9 @@ module Clickmeetings
   def self.with_client(client)
     client = Client.new(client) unless client.is_a?(Client)
     ClientRegistry.client = client
-    yield
+    result = yield
     ClientRegistry.client = nil
+    result
   end
 
   class ClientRegistry # :nodoc:
@@ -42,4 +41,6 @@ module Clickmeetings
   end
 
   require 'clickmeetings/engine' if defined?(Rails)
+  Gem.find_files('clickmeetings/models/open_api/*.rb').each { |f| require f }
+  Gem.find_files('clickmeetings/models/privatelabel/*.rb').each { |f| require f }
 end
