@@ -14,7 +14,6 @@ module Clickmeetings
 
       @connect = Faraday.new(url: url) do |faraday|
         faraday.adapter Faraday.default_adapter
-        faraday.response :json, content_type: /\bjson$/
         faraday.use :instrumentation
       end
     end
@@ -34,7 +33,9 @@ module Clickmeetings
     def handle_response(response)
       case response.status
       when 200, 201
-        response.body
+        body = response.body
+        body = JSON.parse body unless body == "true"
+        body
       when 400
         fail Clickmeetings::BadRequestError, response.body
       when 401
