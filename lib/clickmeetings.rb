@@ -4,6 +4,13 @@ require 'clickmeetings/client'
 require 'clickmeetings/model'
 require 'clickmeetings/exceptions'
 
+require 'clickmeetings/models/privatelabel/model'
+require 'clickmeetings/models/privatelabel/account'
+require 'clickmeetings/models/privatelabel/conference'
+require 'clickmeetings/models/privatelabel/profile'
+
+Gem.find_files('clickmeetings/models/open_api/*.rb').each { |f| require f }
+
 module Clickmeetings
   def self.config
     @config ||= Config.new
@@ -41,6 +48,4 @@ module Clickmeetings
   end
 
   require 'clickmeetings/engine' if defined?(Rails)
-  Gem.find_files('clickmeetings/models/open_api/*.rb').each { |f| require f }
-  Gem.find_files('clickmeetings/models/privatelabel/*.rb').each { |f| require f }
 end

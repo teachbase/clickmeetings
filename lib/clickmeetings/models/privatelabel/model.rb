@@ -1,0 +1,14 @@
+module Clickmeetings
+  module PrivateLabel
+    class Model < ::Clickmeetings::Model
+      class << self
+        def client_options
+          {
+            url: Clickmeetings.config.privatelabel_host,
+            api_key: Clickmeetings.config.privatelabel_api_key
+          }
+        end
+      end
+    end
+  end
+end

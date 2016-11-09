@@ -44,23 +44,16 @@ module Clickmeetings
         @resource_name = name
       end
 
-      def set_client_host(host = nil)
-        @client_host = host
-      end
-
-      def set_client_api_key(api_key = nil)
-        @client_api_key = api_key
-      end
-
       def client_options
         {
-          url: @client_host ||= Clickmeetings.config.host,
-          api_key: @client_api_key ||= Clickmeetings.config.api_key
+          url: Clickmeetings.config.host,
+          api_key: Clickmeetings.config.api_key
         }
       end
     end
 
     delegate :resource_name, to: :class
+    delegate :client_options, to: :class
 
     def client
       Clickmeetings.client
@@ -109,8 +102,6 @@ module Clickmeetings
     end
 
     private
-
-    delegate :client_options, to: :class
 
     def merge_attributes(attrs)
       if attrs.is_a?(Array)

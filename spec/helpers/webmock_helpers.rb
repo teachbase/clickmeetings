@@ -1,7 +1,8 @@
 module ClickmeetingWebMock
-  def mock_api(verb = nil, action = nil, status = 200)
+  def mock_api(verb = nil, action = nil, status = 200, open: false)
+    host = open ? Clickmeetings.config.host : Clickmeetings.config.privatelabel_host
     params = [
-      verb, Clickmeetings.config.privatelabel_host,
+      verb, host,
       action, status
     ]
     action_stub(*params) unless action.nil? || verb.nil?
