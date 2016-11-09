@@ -1,9 +1,6 @@
 module Clickmeetings
   module PrivateLabel
-    class Conference < ::Clickmeetings::Model
-      set_client_host Clickmeetings.config.privatelabel_host
-      set_client_api_key Clickmeetings.config.privatelabel_api_key
-
+    class Conference < Model
       attr_accessor :id, :room_type, :room_pin, :name, :name_url, :description,
                     :access_type, :lobby_description, :status, :created_at,
                     :updated_at, :permanent_room, :ccc, :starts_at, :ends_at,

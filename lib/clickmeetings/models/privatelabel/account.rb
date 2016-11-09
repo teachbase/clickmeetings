@@ -1,9 +1,6 @@
 module Clickmeetings
   module PrivateLabel
-    class Account < ::Clickmeetings::Model
-      set_client_host Clickmeetings.config.privatelabel_host
-      set_client_api_key Clickmeetings.config.privatelabel_api_key
-
+    class Account < ::Clickmeetings::PrivateLabel::Model
       attr_accessor :account_expiration_date,
                     :meetings_allowed,
                     :package,
