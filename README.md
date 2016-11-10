@@ -20,7 +20,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Configuration
+
+With Rails you can write in `config/secrets.yml`:
+```yaml
+clickmeetings:
+  privatelabel_api_key: your_api_key
+```
+If you want to use test platform [AnySecond](http://anysecond.com), you can add:
+```yaml
+privatelabel_host: http://api.anysecond.com/privatelabel/v1
+```
+
+Without Rails you can use:
+```ruby
+Clickmeetings.configure do |config|
+  config.privatelabel_api_key = "your_api_key"
+  config.privatelabel_host = "http://host.you.want.to/use"
+end
+```
+or use environment variables `CLICKMEETINGS_PRIVATELABEL_API_KEY` and `CLICKMEETINGS_PRIVATELABEL_HOST`
+
+### Integration
+
+TODO
 
 ## Development
 
