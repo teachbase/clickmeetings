@@ -8,6 +8,7 @@
 /spec/reports/
 /tmp/
 /.DS_Store
+/lin/.DS_Store
 examples.txt
 /clickmeetings.yml
 /clickmeetings-*.gem
