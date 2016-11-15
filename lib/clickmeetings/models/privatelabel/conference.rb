@@ -5,7 +5,8 @@ module Clickmeetings
                     :access_type, :lobby_description, :status, :created_at,
                     :updated_at, :permanent_room, :ccc, :starts_at, :ends_at,
                     :access_role_hashes, :room_url, :phone_listener_pin,
-                    :phone_presenter_pin, :embed_room_url, :recorder_list, :account_id
+                    :phone_presenter_pin, :embed_room_url, :recorder_list, :account_id,
+                    :password
 
       class NoAccountError < ::Clickmeetings::ClickmeetingError; end
 
