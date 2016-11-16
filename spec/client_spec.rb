@@ -2,12 +2,10 @@ require "spec_helper"
 
 describe Clickmeetings::Client do
   let(:client) do
-    described_class.new(url: Clickmeetings.config.privatelabel_host,
-                        api_key: Clickmeetings.config.privatelabel_api_key)
+    described_class.new(url: Clickmeetings.config.privatelabel_host)
   end
 
-  it "should create client", :aggregate_failures do
-    expect(subject.api_key).to eq Clickmeetings.config.api_key
+  it "should create client" do
     expect(subject.url).to eq Clickmeetings.config.host
   end
 
@@ -17,6 +15,25 @@ describe Clickmeetings::Client do
     it "gets client's info" do
       res = client.get "client"
       expect(res).to eq JSON.parse(File.read("./spec/fixtures/get_client.json"))
+    end
+  end
+
+  context "with header authorization" do
+    before do
+      stub_request(:get, "#{Clickmeetings.config.host}/ping")
+        .with(headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Type'=>'application/x-www-form-urlencoded',
+          'User-Agent'=>'Faraday v0.9.2',
+          'X-Api-Key'=>'qwer'
+        })
+        .to_return(status: 200, body: "{\"ping\":\"pong\"}")
+    end
+
+    it "responds with pong" do
+      res = subject.get "ping", {}, {"X-Api-Key" => "qwer"}
+      expect(res).to eq({"ping" => "pong"})
     end
   end
 
@@ -33,5 +50,11 @@ describe Clickmeetings::Client do
       subject { client.get "client" }
       specify { expect { subject }.to raise_error error_class }
     end
+  end
+
+  context "#request when client doesn't respond method" do
+    subject { client.request :set, "client" }
+
+    specify { expect { subject }.to raise_error(Clickmeetings::UndefinedHTTPMethod) }
   end
 end

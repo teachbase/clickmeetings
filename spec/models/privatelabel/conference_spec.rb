@@ -2,17 +2,35 @@ require "spec_helper"
 
 describe Clickmeetings::PrivateLabel::Conference do
   context '::by_account' do
-    before { described_class.by_account(account_id: 1) }
-    after(:all) { described_class.by_account(account_id: nil) }
+    context "without block" do
+      before { described_class.by_account(account_id: 1) }
+      after(:all) { described_class.by_account(account_id: nil) }
 
-    subject { described_class.account_id }
-
-    specify { expect(subject).to eq 1 }
-
-    context "gives account_id to objects" do
-      subject { described_class.new.account_id }
+      subject { described_class.account_id }
 
       specify { expect(subject).to eq 1 }
+
+      context "gives account_id to objects" do
+        subject { described_class.new.account_id }
+
+        specify { expect(subject).to eq 1 }
+      end
+    end
+
+    context 'with block' do
+      subject do
+        described_class.by_account account_id: 1 do
+          described_class.account_id
+        end
+      end
+
+      it "uses specified account_id in block" do
+        expect(subject).to eq 1
+      end
+
+      it "hasn't account_id out of block" do
+        expect(described_class.account_id).to be_nil
+      end
     end
   end
 

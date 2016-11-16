@@ -1,4 +1,3 @@
-require 'clickmeetings'
 require 'active_model'
 
 module Clickmeetings
@@ -13,7 +12,9 @@ module Clickmeetings
       attr_accessor :resource_name
       attr_reader :client_host, :client_api_key
 
-      delegate :remote_url, :remote_path, :handle_response, :client, to: :new
+      delegate :remote_url, :remote_path, :handle_response, :client,
+               :default_params, :default_headers, to: :new
+      delegate :first, :last, to: :all
     
       def resource_name
         @resource_name ||= self.name.demodulize.pluralize.downcase
@@ -21,21 +22,21 @@ module Clickmeetings
 
       def find(id)
         response = Clickmeetings.with_client(client_options) do
-          client.get(remote_url(__method__, id: id))
+          client.get(remote_url(__method__, id: id), default_params, default_headers)
         end
         handle_response(response)
       end
 
       def all
         response = Clickmeetings.with_client(client_options) do
-          client.get(remote_url(__method__))
+          client.get(remote_url(__method__), default_params, default_headers)
         end
         handle_response(response)
       end
 
       def create(params = {})
         response = Clickmeetings.with_client(client_options) do
-          client.post(remote_url(__method__), params)
+          client.post(remote_url(__method__), params.merge(default_params), default_headers)
         end
         handle_response(response)
       end
@@ -45,10 +46,7 @@ module Clickmeetings
       end
 
       def client_options
-        {
-          url: Clickmeetings.config.host,
-          api_key: Clickmeetings.config.api_key
-        }
+        { url: Clickmeetings.config.host }
       end
     end
 
@@ -60,22 +58,24 @@ module Clickmeetings
     end
 
     def remote_url(action = nil, params = {})
-      url = remote_path(action, params)
+      remote_path(action, params)
     end
 
-    def persist?
-      !!id
-    end
+    # def persist?
+    #   !!id
+    # end
 
     def update(params = {})
       response = Clickmeetings.with_client(client_options) do
-        client.put(remote_url(__method__), params)
+        client.put(remote_url(__method__), params.merge(default_params), default_headers)
       end
       handle_response response
     end
 
-    def destroy(params = {})
-      Clickmeetings.with_client(client_options) { client.delete(remote_url(__method__), params) }
+    def destroy()
+      Clickmeetings.with_client(client_options) do
+        client.delete(remote_url(__method__), default_params, default_headers)
+      end
       self
     end
 
@@ -96,9 +96,19 @@ module Clickmeetings
         "#{resource_name}/#{id}"
       when :destroy
         "#{resource_name}/#{id}"
+      when :destroy_all
+        resource_name
       else
         "#{resource_name}/#{params[:id]}/#{action}"
       end
+    end
+
+    def default_params
+      Hash.new
+    end
+
+    def default_headers
+      Hash.new
     end
 
     private
@@ -117,7 +127,7 @@ module Clickmeetings
 
     def merge_object(attrs)
       attrs.each do |attribute, val|
-        if respond_to?(attribute)
+        if respond_to?("#{attribute}=")
           send("#{attribute}=", val)
         elsif val.is_a? Hash
           merge_object val

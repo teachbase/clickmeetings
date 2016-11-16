@@ -20,7 +20,9 @@ module Clickmeetings
 
       %w(enable disable).each do |m|
         define_method m do
-          Clickmeetings.with_client(client_options) { client.put(remote_url(__method__, id: id)) }
+          Clickmeetings.with_client(client_options) do
+            client.put(remote_url(__method__, id: id), default_params)
+          end
           @account_status = (m == "enable" ? "active" : "disabled")
           self
         end

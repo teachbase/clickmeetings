@@ -4,15 +4,14 @@ require 'json'
 
 module Clickmeetings
   class Client
-    attr_reader :url, :api_key
+    attr_reader :url, :connect
 
-    def initialize(url: Clickmeetings.config.host,
-                   api_key: Clickmeetings.config.api_key)
-
+    def initialize(url: Clickmeetings.config.host)
       @url = url
-      @api_key = api_key
 
       @connect = Faraday.new(url: url) do |faraday|
+        faraday.request :multipart
+        faraday.request :url_encoded
         faraday.adapter Faraday.default_adapter
         faraday.use :instrumentation
       end
@@ -52,10 +51,10 @@ module Clickmeetings
     end
 
     %w(get post put patch delete).each do |method|
-      define_method method do |url, params = {}|
+      define_method method do |url, params = {}, headers = {}|
         l = lambda do |req|
-          req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-          req.body = params.merge(api_key: api_key).to_query
+          req.headers.merge! headers
+          req.body = params
         end
         request(method, url, &l)
       end

@@ -3,21 +3,18 @@ require 'clickmeetings/config'
 require 'clickmeetings/client'
 require 'clickmeetings/model'
 require 'clickmeetings/exceptions'
+require 'clickmeetings/storage'
 
 require 'clickmeetings/models/privatelabel/model'
-require 'clickmeetings/models/privatelabel/account'
-require 'clickmeetings/models/privatelabel/conference'
-require 'clickmeetings/models/privatelabel/profile'
+Gem.find_files('clickmeetings/models/privatelabel/*.rb').each { |f| require f }
 
-Gem.find_files('clickmeetings/models/open_api/*.rb').each { |f| require f }
+require 'clickmeetings/models/open/model'
+Gem.find_files('clickmeetings/models/open/concerns/*.rb').each { |f| require f }
+Gem.find_files('clickmeetings/models/open/*.rb').each { |f| require f }
 
 module Clickmeetings
   def self.config
     @config ||= Config.new
-  end
-
-  def self.properties
-    client.properties
   end
 
   def self.configure
@@ -31,6 +28,7 @@ module Clickmeetings
   def self.reset
     @config = nil
     @client = nil
+    ClientRegistry.client = nil
   end
 
   def self.with_client(client)

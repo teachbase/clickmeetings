@@ -1,0 +1,45 @@
+{
+  "conference": {
+    "id": 2,
+    "room_type": "webinar",
+    "room_pin": 269194961,
+    "name": "new_conf_name",
+    "name_url": "35fbafd7a6945f8f",
+    "access_type": 2,
+    "lobby_enabled": true,
+    "lobby_description": "",
+    "registration_enabled": 0,
+    "status": "active",
+    "timezone": "Europe/Moscow",
+    "timezone_offset": 10800,
+    "created_at": "2016-11-17T19:14:14+03:00",
+    "updated_at": "2016-11-17T19:14:14+03:00",
+    "permanent_room": true,
+    "access_role_hashes": {
+      "listener": "a83d20c41880c33708d26b005830e4f4",
+      "presenter": "af83f4b748b1894e9b5c3c005830e4f4",
+      "host": "1b17b29ff8b147c65cfcc6005830e4f4"
+    },
+    "room_url": "http://qwerewrq.anysecond.com/35fbafd7a6945f8f",
+    "phone_presenter_pin": 184823,
+    "phone_listener_pin": 593469,
+    "embed_room_url": "http://embed.anysecond.com/embed_conference.html?r=16536349882141",
+    "widgets_hash": "cifGe6",
+    "recorder_list": [
+
+    ],
+    "settings": {
+      "show_on_personal_page": true,
+      "thank_you_emails_enabled": true,
+      "connection_tester_enabled": false,
+      "recorder_autostart_enabled": false,
+      "room_invite_button_enabled": true,
+      "social_media_sharing_enabled": false,
+      "connection_status_enabled": true
+    },
+    "autologin_hashes": {
+      "host": "BQtlZGDkDUjgsROxnaWyDTEdpzHhMTcNsP18DTEdpzIlnzIxDUjgsRONsP18DQSiZGqiZwympmuiZGD3pQL1pUAjpQLjZQH4ZmOlAUZ0DUjgsRN__"
+    },
+    "autologin_hash": "BQtlZGDkDUjgsROxnaWyDTEdpzHhMTcNsP18DTEdpzIlnzIxDUjgsRONsP18DQSiZGqiZwympmuiZGD3pQL1pUAjpQLjZQH4ZmOlAUZ0DUjgsRN__"
+  }
+}
