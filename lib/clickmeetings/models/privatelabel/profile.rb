@@ -11,7 +11,7 @@ module Clickmeetings
 
       def get
         response = Clickmeetings.with_client(client_options) do
-          Clickmeetings.client.get('client'), default_params, default_headers
+          Clickmeetings.client.get 'client', default_params, default_headers
         end
         handle_response response
       end
