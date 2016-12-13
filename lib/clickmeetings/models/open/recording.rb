@@ -11,7 +11,7 @@ module Clickmeetings
           res = all
 
           Clickmeetings.with_client(client_options) do
-            Clickmeetings.client.delete remote_url(__method__), default_headers, default_params
+            Clickmeetings.client.delete remote_url(__method__), default_params, default_headers
           end
 
           res
