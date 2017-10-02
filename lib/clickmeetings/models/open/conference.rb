@@ -9,7 +9,7 @@ module Clickmeetings
                     :access_role_hashes, :room_url, :phone_listener_pin,
                     :phone_presenter_pin, :embed_room_url, :recorder_list, :account_id,
                     :password, :settings, :autologin_hashes, :autologin_hash, :skin_id,
-                    :registration_enabled, :registration
+                    :registration_enabled, :registration, :associations_api_key
 
       class << self
         def all
@@ -49,8 +49,10 @@ module Clickmeetings
       %w(tokens sessions registrations recordings).each do |m|
         define_method m do
           const = "Clickmeetings::Open::#{m.singularize.capitalize}".constantize
-          const.by_conference(conference_id: id) do
-            const.all
+          const.with_account(account_api_key: associations_api_key) do
+            const.by_conference(conference_id: id) do
+              const.all
+            end
           end
         end
       end

@@ -61,10 +61,6 @@ module Clickmeetings
       remote_path(action, params)
     end
 
-    # def persist?
-    #   !!id
-    # end
-
     def update(params = {})
       response = Clickmeetings.with_client(client_options) do
         client.put(remote_url(__method__), params.merge(default_params), default_headers)
@@ -81,7 +77,11 @@ module Clickmeetings
 
     def handle_response(body)
       return unless [Hash, Array].include? body.class
-      merge_attributes(body)
+      result = merge_attributes(body)
+      if respond_to?("api_key") && result.respond_to?("associations_api_key=")
+        result.associations_api_key = api_key
+      end
+      result
     end
 
     def remote_path(action = nil, params = {})
