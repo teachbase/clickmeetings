@@ -49,7 +49,7 @@ module Clickmeetings
       %w(tokens sessions registrations recordings).each do |m|
         define_method m do
           const = "Clickmeetings::Open::#{m.singularize.capitalize}".constantize
-          const.with_account(account_api_key: associations_api_key) do
+          const.with_account(account_api_key: associations_api_key || api_key) do
             const.by_conference(conference_id: id) do
               const.all
             end
