@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Clickmeetings::VERSION
   spec.authors       = ["Sergei Alekseenko", "Makar Ermokhin"]
   spec.email         = ["alekseenkoss@gmail.com", "ermak95@gmail.com"]
-  spec.summary       = %q{Simple REST API client for ClickMeetings Private Label API}
-  spec.description   = %q{Simple REST API client for ClickMeetings Private Label API}
+  spec.summary       = %q{Simple REST API client for ClickMeetings Private Label and Open API}
+  spec.description   = %q{Simple REST API client for ClickMeetings Private Label and Open API}
   spec.homepage      = "https://github.com/teachbase/clickmeetings"
   spec.license       = "MIT"
 
