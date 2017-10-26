@@ -1,0 +1,57 @@
+[
+  {
+    "id": "5",
+    "name": "Business 2",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/business_2/preview.png"
+  },
+  {
+    "id": "6",
+    "name": "Business 3",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/business_3/preview.png"
+  },
+  {
+    "id": "7",
+    "name": "Education 1",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/education_1/preview.png"
+  },
+  {
+    "id": "8",
+    "name": "Education 2",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/education_2/preview.png"
+  },
+  {
+    "id": "9",
+    "name": "Education 3",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/education_3/preview.png"
+  },
+  {
+    "id": "10",
+    "name": "Elegance 1",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/elegance_1/preview.png"
+  },
+  {
+    "id": "12",
+    "name": "Christmas 1",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/christmas_1/preview.png"
+  },
+  {
+    "id": "13",
+    "name": "Christmas 2",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/christmas_2/preview.png"
+  },
+  {
+    "id": "14",
+    "name": "Christmas 3",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/christmas_3/preview.png"
+  },
+  {
+    "id": "15",
+    "name": "Christmas 4",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/christmas_4/preview.png"
+  },
+  {
+    "id": "4",
+    "name": "Business 1",
+    "thumbnail_url": "http://account-panel.anysecond.com/images/conferences/skin_templates/business_1/preview.png"
+  }
+]

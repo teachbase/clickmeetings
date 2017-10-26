@@ -1,4 +1,3 @@
-require 'clickmeetings'
 require 'rails'
 
 module Clickmeetings

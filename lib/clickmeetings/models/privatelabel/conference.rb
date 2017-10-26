@@ -11,30 +11,38 @@ module Clickmeetings
       class NoAccountError < ::Clickmeetings::ClickmeetingError; end
 
       class << self
-        attr_reader :account_id
-
         def by_account(account_id: nil)
-          @account_id = account_id
-          self
+          Storage.cm_private_current_account = account_id
+          if block_given?
+            result = yield
+            Storage.cm_private_current_account = nil
+            result
+          else
+            self
+          end
         end
 
         def find(id)
-          fail Clickmeetings::PrivateLabel::Conference::NoAccountError if @account_id.nil?
+          fail Clickmeetings::PrivateLabel::Conference::NoAccountError if account_id.nil?
           super
         end
 
         def all
-          fail Clickmeetings::PrivateLabel::Conference::NoAccountError if @account_id.nil?
+          fail Clickmeetings::PrivateLabel::Conference::NoAccountError if account_id.nil?
           response = Clickmeetings.with_client(client_options) do
-            Clickmeetings.client.get remote_url(__method__)
+            Clickmeetings.client.get remote_url(__method__), default_params
           end
-          response = response["active_conferences"] + response["inactive_conferences"]
+          response = response["active_conferences"].to_a + response["inactive_conferences"].to_a
           handle_response response
         end
 
         def create(params = {})
-          fail Clickmeetings::PrivateLabel::Conference::NoAccountError if @account_id.nil?
+          fail Clickmeetings::PrivateLabel::Conference::NoAccountError if account_id.nil?
           super
+        end
+
+        def account_id
+          Storage.cm_private_current_account
         end
       end
 
@@ -44,7 +52,7 @@ module Clickmeetings
       end
 
       def remote_url(action = nil, params = {})
-        url = Account.remote_path(:find, id: @account_id) + '/' + remote_path(action, params)
+        "#{Account.remote_path(:find, id: @account_id)}/#{remote_path(action, params)}"
       end
 
       def update(params = {})

@@ -1,0 +1,10 @@
+{
+  "id": 774922,
+  "name": "pdf-5.pdf",
+  "document_type": "presentation_pdf",
+  "conversion_progress": 0,
+  "upload_date": "2016-11-24 15:41:41",
+  "status": "waiting_for_conversion",
+  "status_message": "waiting for multiconverter to download file.",
+  "url": "http://api.anysecond.com/v1/file-library/774922/download"
+}

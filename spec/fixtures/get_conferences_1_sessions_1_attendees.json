@@ -1,0 +1,38 @@
+[
+  {
+    "uid": "7823916",
+    "role": "listener",
+    "nickname": "Oga",
+    "email": "oga@teahbase.ru",
+    "device": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36",
+    "rating": "5",
+    "rating_comment": "ащ ащ вебинар\nукусила бы",
+    "start_date": "2016-11-17T19:25:00+03:00",
+    "end_date": "2016-11-17T19:34:00+03:00",
+    "user_ip": "213.134.198.189"
+  },
+  {
+    "uid": "7412765",
+    "role": "presenter",
+    "nickname": "makarrrrrr",
+    "email": "erk95@gail.com",
+    "device": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36",
+    "rating": null,
+    "rating_comment": null,
+    "start_date": "2016-11-17T19:21:00+03:00",
+    "end_date": "2016-11-17T19:34:00+03:00",
+    "user_ip": "213.134.198.189"
+  },
+  {
+    "uid": "7538444",
+    "role": "host",
+    "nickname": "qwerewrq",
+    "email": "qwer@qwer.qw",
+    "device": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36",
+    "rating": null,
+    "rating_comment": null,
+    "start_date": "2016-11-17T19:15:00+03:00",
+    "end_date": "2016-11-17T19:34:00+03:00",
+    "user_ip": "213.134.198.189"
+  }
+]

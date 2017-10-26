@@ -1,0 +1,54 @@
+{
+  "total_visitors": 3,
+  "max_visitors": 3,
+  "start_date": "2016-11-17T19:15:00+03:00",
+  "end_date": "2016-11-17T19:34:00+03:00",
+  "attendees": [
+    {
+      "id": 7823916,
+      "start_date": "2016-11-17T19:25:00+03:00",
+      "end_date": "2016-11-17T19:34:00+03:00",
+      "login": "Olga",
+      "email": "olga@teachbase.ru"
+    },
+    {
+      "id": 7412765,
+      "start_date": "2016-11-17T19:21:00+03:00",
+      "end_date": "2016-11-17T19:34:00+03:00",
+      "login": "makarrrrrr",
+      "email": "ermak95@gmail.com"
+    },
+    {
+      "id": 7538444,
+      "start_date": "2016-11-17T19:15:00+03:00",
+      "end_date": "2016-11-17T19:34:00+03:00",
+      "login": "qwerewrq",
+      "email": "qwer@qwer.qw"
+    }
+  ],
+  "pdf": {
+    "en": {
+      "status": "FINISHED",
+      "url": "http://api.anysecond.com/panel/pdf/en/5342110/VAqcdc",
+      "progress": 100
+    },
+    "pl": {
+      "generate_pdf_url": "http://api.anysecond.com/v1/conferences/882141/sessions/5342110/generate-pdf/pl",
+      "progress": 0
+    },
+    "ru": {
+      "status": "IN PROGRESS",
+      "url": "http://api.anysecond.com/panel/pdf/ru/5342110/VAqcdc",
+      "progress": 0
+    },
+    "de": {
+      "generate_pdf_url": "http://api.anysecond.com/v1/conferences/882141/sessions/5342110/generate-pdf/de",
+      "progress": 0
+    },
+    "es": {
+      "status": "FINISHED",
+      "url": "http://api.anysecond.com/panel/pdf/es/5342110/VAqcdc",
+      "progress": 100
+    }
+  }
+}

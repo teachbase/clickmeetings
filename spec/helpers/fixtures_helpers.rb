@@ -5,7 +5,7 @@ module FixturesHelpers
   end
 
   def build_file_name(verb, name)
-    name = [verb, name.gsub("/", "_")].join("_")
+    name = [verb, name.gsub("/", "_").sub(/_+$/, '')].join("_")
     "./spec/fixtures/#{name}.json"
   end
 end
