@@ -12,8 +12,8 @@ module Clickmeetings
       @connect = Faraday.new(url: url) do |faraday|
         faraday.request :multipart
         faraday.request :url_encoded
-        faraday.adapter Faraday.default_adapter
         faraday.use :instrumentation
+        faraday.adapter Faraday.default_adapter
       end
     end
 
