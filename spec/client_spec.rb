@@ -25,7 +25,6 @@ describe Clickmeetings::Client do
           'Accept'=>'*/*',
           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
           'Content-Type'=>'application/x-www-form-urlencoded',
-          'User-Agent'=>'Faraday v0.9.2',
           'X-Api-Key'=>'qwer'
         })
         .to_return(status: 200, body: "{\"ping\":\"pong\"}")

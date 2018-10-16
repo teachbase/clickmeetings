@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry', "~> 0.10"
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency "simplecov-gem-profile"
+  spec.add_development_dependency "pry-byebug"
   spec.add_dependency "anyway_config", "~> 0", ">= 0.3"
   spec.add_dependency "faraday", "~> 0.9"
   spec.add_dependency "faraday_middleware", "~> 0.10"
