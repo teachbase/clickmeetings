@@ -7,7 +7,7 @@ module Clickmeetings
     include ActiveModel::Validations
 
     attr_accessor :id
-  
+
     class << self
       attr_accessor :resource_name
       attr_reader :client_host, :client_api_key
@@ -15,7 +15,7 @@ module Clickmeetings
       delegate :remote_url, :remote_path, :handle_response, :client,
                :default_params, :default_headers, to: :new
       delegate :first, :last, to: :all
-    
+
       def resource_name
         @resource_name ||= self.name.demodulize.pluralize.downcase
       end
@@ -99,8 +99,12 @@ module Clickmeetings
       when :destroy_all
         resource_name
       else
-        "#{resource_name}/#{params[:id]}/#{action}"
+        action_path(action, params[:id])
       end
+    end
+
+    def action_path(action, id)
+      id ? "#{resource_name}/#{id}/#{action}" : "#{resource_name}/#{action}"
     end
 
     def default_params
