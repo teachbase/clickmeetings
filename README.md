@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/teachbase/clickmeetings.svg?branch=master)](https://travis-ci.org/teachbase/clickmeetings)
+
 # Clickmeetings
 
 Simple REST API client to interact with [Clickmeeting](https://clickmeeting.com) open and Privatelabel API.
@@ -33,7 +35,7 @@ clickmeetings:
   api_key: your_open_api_key
   locale: es # default language (uses e.g. in invitations)
 ```
-+ in `config/clickmeetings.yml`: 
++ in `config/clickmeetings.yml`:
 ```yml
 privatelabel_host: https://api.clickmeetings.com/privatelabel/v1 # or http://api.anysecond.com/privatelabel/v1
 privatelabel_api_key: your_privatelabel_api_key
@@ -70,7 +72,7 @@ end
   # => updated Clickmeetings::PrivateLabel::Account object
   # see specification to know what params you can provide
   account = account.disable # sets account's status to 'disabled'
-  account = account.enable  # sets account's status to 'active' 
+  account = account.enable  # sets account's status to 'active'
   account.destroy # => deleted account
   Clickmeetings::PrivateLabel::Account.all # => array of accounts
   Clickmeetings::PrivateLabel::Account.find(1) # => account details with id = 1 or
@@ -92,19 +94,19 @@ end
       # there Clickmeetings::PrivateLabel::Conference.account_id equals to 1
     end
     # and there Clickmeetings::PrivateLabel::Conference.account_id equals to nil
-    
+
     Clickmeetings::PrivateLabel::Conference.by_account(account_id: 1).new
     # => #<Clickmeetings::PrivateLabel::Conference:0x... @account_id=1>
     ```
     + Do anything
     ```ruby
     Clickmeetings::PrivateLabel::Conference.by_account(account_id: 1) do
-      # use Clickmeetings::PrivateLabel::Conference.create, .all and .find methods+ 
+      # use Clickmeetings::PrivateLabel::Conference.create, .all and .find methods+
       # to create conference, get list of conferences for account or get conference
       # details
-      
+
       # and #update and #destroy instance methods to change or delete any conference
-      
+
       # params same as in Open API (see below)
     end
     ```
@@ -116,7 +118,7 @@ end
     # do anything in another account
   end
   ```
-  + Сonference 
+  + Сonference
     ```ruby
     Clickmeetings::Open::Conference.active   # => list of active conferences
     Clickmeetings::Open::Conference.inactive # => list of inactive conferences
@@ -137,7 +139,7 @@ end
         + duration (String "h:mm"): duration of conference, between 0:05 and 3:00
         + timezone (String): Time zone of conference (e.g. “America/New_York”)
         + skin_id (integer): Skin identifier
-        + registration (Hash):  
+        + registration (Hash):
           + enabled (Boolean)
           + template (Integer): registration template, between 1 and 3
         + status (String): "active" or "inactive"
@@ -148,7 +150,7 @@ end
     Clickmeetings::Open::Conference.find(1).create_tokens(10)
     # creates tokens for confereces with access_type = 3;
     # param specifies how many tokens will be created (default is 1)
-    
+
     Clickmeetings::Open::Conference.new(id: 1).send_invites(
       attendees: [
         {email: "first@teachbase.ru"},
@@ -159,13 +161,13 @@ end
     )
     # send invites to emails in attendees for specified role. Template means view of email
     # .new(id: 1) specifies id of conference. Unlike .find(1) it doesn't request to clickmeetings
-    
+
     Clickmeetings::Open::Conference.new(id: 1).files # => files for conference
     Clickmeetings::Open::Conference.new(id: 1).tokens # => tokens for conference (if access_type is 3)
     Clickmeetings::Open::Conference.new(id: 1).sessions # => sessions for conference
     Clickmeetings::Open::Conference.new(id: 1).registrations # => registrations for conference
     Clickmeetings::Open::Conference.new(id: 1).recordings # => recordings for conference
-    
+
     Clickmeetings::Open::Conference.new(id: 1).register(
       registration: {
         1 => "firstname",
@@ -261,21 +263,21 @@ end
     If contact with passed email exists, it will be updated
   
   + TimeZone
-    
+
     Only `.all` method with optional param `:country`. Returns array of strings.
     ```ruby
     Clickmeetings::Open::TimeZone.all country: :ru # => time zones in Russia
     Clickmeetings::Open::TimeZone.all # => all time zones
     ```
-    
+
   + PhoneGateway
-  
+
     ```ruby
     Clickmeetings::Open::PhoneGateway.all # => array of phone gateways
     ```
-    
+
   + Registration
-  
+
     ```ruby
     Clickmeetings::Open::Registration.by_conference(conference_id: 1) do
       Clickmeetings::Open::Registration.all # => array of registrations
@@ -286,9 +288,9 @@ end
       # => registrations for session with id 1
     end
     ```
-    
+
   + FileLibrary
-  
+
     ```ruby
     Clickmeetings::Open::FileLibrary.create(path: '/path/to/file.pdf')
     # => FileLibrary instance; creates file in your library
@@ -304,15 +306,15 @@ end
     ```
 
   + Recording
-  
+
     `Clickmeetings::Open::Recordings` interacts with recordings. Specify a conference with `by_conference` (as above) method and use `.all`, `.find`, and `.destroy_all` (to destroy all recordings of conference) methods.
-    
+
   + Chat
-  
+
     `Clickmeetings::Open::Chat` interacts with chats. Use `.all` to get info about chats. `.find` returns content of zip-archive with a chat.
-    
+
   + Other
-  
+
     Use `.ping` with any class to check API status.
 
 ## Development
@@ -320,7 +322,7 @@ end
 + Fork repo
 + Create new branch
 + install dependencies
-    
+
       $ bundle install
 
 + Commit your changes (do not forget about specs)
