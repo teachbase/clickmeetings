@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/teachbase/clickmeetings.svg?branch=master)](https://travis-ci.org/teachbase/clickmeetings)
+[![Ruby CI](https://github.com/teachbase/clickmeetings/actions/workflows/run-tests.yml/badge.svg)](https://github.com/teachbase/clickmeetings/actions/workflows/run-tests.yml/badge.svg)
 
 # Clickmeetings
 
