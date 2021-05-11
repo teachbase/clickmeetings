@@ -32,5 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'anyway_config', '>= 2.0'
   spec.add_dependency 'faraday', '~> 0.9'
   spec.add_dependency 'faraday_middleware', '~> 0.10'
-  spec.add_dependency 'json', '>= 2.3.0'
+  spec.add_dependency 'json', '~> 1.0'
 end
