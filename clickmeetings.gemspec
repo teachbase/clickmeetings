@@ -28,9 +28,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'simplecov-gem-profile'
   spec.add_development_dependency 'webmock', '~> 2'
-  spec.add_dependency 'activemodel', '>= 4.1', '< 6'
+  spec.add_dependency 'activemodel', '>= 4.1', '< 7
   spec.add_dependency 'anyway_config', '>= 0.3'
-  spec.add_dependency 'faraday', '>= 1.0', '< 2'
+  spec.add_dependency 'faraday', '>= 1.0', '< 3'
   spec.add_dependency 'faraday_middleware', '>= 1.0'
-  spec.add_dependency 'json', '~> 1.0'
+  spec.add_dependency 'json', '>= 1.0', '< 3'
 end
