@@ -40,9 +40,7 @@ module Clickmeetings
   end
 
   class ClientRegistry # :nodoc:
-    extend ActiveSupport::PerThreadRegistry
-
-    attr_accessor :client
+    thread_mattr_accessor :client
   end
 
   require 'clickmeetings/engine' if defined?(Rails)
