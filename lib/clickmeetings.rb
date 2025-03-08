@@ -32,7 +32,7 @@ module Clickmeetings
   end
 
   def self.with_client(client)
-    client = Client.new(client) unless client.is_a?(Client)
+    client = Client.new(**client) unless client.is_a?(Client)
     ClientRegistry.client = client
     result = yield
     ClientRegistry.client = nil
